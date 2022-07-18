@@ -1,21 +1,21 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import Window kivy.core.window.Window
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
-
+#:include libs/uix/baseclass/classes.kv
 
 
 MDScreen:
-    name: 'signup'
+    name: 'login'
     LoginLayout:
+        id: login_page
 
 
-        ############## SIGNUP INPUTS ###############
+        ############## LOGIN INPUTS ###############
+
         LoginLabelCard:
             pos_hint: {"center_x": 0.5, "center_y": 0.85}
             LoginHeaderLabel:
-                text: 'Sign Up'
-                bold: True
-
+                text: 'Login'
 
 
 
@@ -28,7 +28,7 @@ MDScreen:
             MDBoxLayout:
                 orientation: "horizontal"
                 LoginInputField:
-                    id: username_signup
+                    id: username_login
                     on_focus: app.keypad_listener(self.parent.parent.pos_hint , self.focus)
 
 
@@ -38,49 +38,44 @@ MDScreen:
         LoginLabelCard:
             pos_hint: {"center_x": 0.5, "center_y": 0.636}
             LoginGeneralLabel:
-                text: 'Email'
+                text: 'Password'
         LoginInputCard:
             pos_hint: {"center_x": 0.5, "center_y": 0.576}
             MDBoxLayout:
                 orientation: "horizontal"
                 LoginInputField:
-                    id: email_signup
+                    id: password_login
+                    password: True
                     on_focus: app.keypad_listener(self.parent.parent.pos_hint , self.focus)
-
-
-
 
 
         LoginLabelCard:
             pos_hint: {"center_x": 0.5, "center_y": 0.512}
             LoginGeneralLabel:
-                text: 'Password'
-        LoginInputCard:
-            pos_hint: {"center_x": 0.5, "center_y": 0.452}
-            MDBoxLayout:
-                orientation: "horizontal"
-
-                LoginInputField:
-                    id: password_signup
-                    hint_pos: {"center_x":0.5 , "center_y": 0.5}
-                    on_focus: app.keypad_listener(self.parent.parent.pos_hint , self.focus)
-                    password: True
+                text: 'Forgot password?'
+                halign: 'right'
 
 
-        ############## SIGNUP BUTTON #################
+        ############## LOGIN BUTTON #################
+
         LoginButton:
             Button:
-                id: signup_btn
+                id: login_btn
                 background_color: 0,0,0,0
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                on_press: app.sign_up()
-    #            on_press: app.details_check('home')
+                on_press: app.verify()
+         #       on_press: app.details_check('home')
+
         LoginButton:
-            pos_hint: {"center_x": 0.5, "center_y": 0.22}
             MDBoxLayout:
                 LoginButtonLabel:
-                    text: 'SIGN UP'
-        ############## SOCIAL SIGNUP SECTION ##########
+                    text: 'LOGIN'
+                    bold: True
+
+
+
+        ############## SOCIAL LOGIN SECTION ##########
+
         MDCard:
             orientation: "vertical"
             md_bg_color: get_color_from_hex("#012241")
@@ -89,6 +84,8 @@ MDScreen:
             pos_hint: {"center_x": 0.5, "center_y": 0.15}
             LoginFooterLabel:
                 text: 'or'
+
+
         MDCard:
             orientation: "horizontal"
             md_bg_color: get_color_from_hex("#012241")
@@ -98,31 +95,31 @@ MDScreen:
             MDFloatLayout:
                 MDIconButton:
                     halign: "center"
-                    icon: "facebook_logo.png"
+                    icon: "assets/images/facebook_logo.png"
                     on_press: app.facebook_login()
                     size: self.parent.size
                     user_font_size: "5sp"
                     pos_hint: {"center_x": 0.43, "center_y": 0.5}
                 MDIconButton:
                     halign: "center"
-                    icon: "google_logo.png"
+                    icon: "assets/images/google_logo.png"
                     on_press: app.google_login()
                     size: self.parent.size
                     user_font_size: "5sp"
                     pos_hint: {"center_x": 0.57, "center_y": 0.5}
-        ############## GOTO LOGIN ###############
 
+
+        ############## GOTO SIGNUP #################
 
         MDBoxLayout:
             size_hint:  0.7 , 0.05
-            id: login_page
+            id: sign_up_page
             pos_hint: {"center_x": 0.5, "center_y": 0.02}
             Button:
                 background_color: 0,0,0,0
-                on_press: app.go_to('login')
+                on_press: app.go_to('signup')
 
 
         LoginFooter:
             LoginFooterLabel:
-                text: "Already have an account? Login"
-
+                text: "Don't have an account? Sign Up"

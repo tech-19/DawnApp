@@ -16,6 +16,10 @@ from db_connection import DataBase
 from user import User
 
 
+path_to_images = 'assets/images/'
+path_to_kv = 'libs/uix/kv/'
+path_to_classes = 'libs/uix/baseclass'
+
 def delay(seconds):
     start = time.time()
     stop = time.time()
@@ -232,11 +236,11 @@ class DawnApp(MDApp):
                          screen_name)
 
         # check if there is an image for the current question
-        file_exists = os.path.exists(f'Q{self.cur_question_idx + 1}.png')
+        file_exists = os.path.exists(f'{path_to_images}Q{self.cur_question_idx + 1}.png')
         if file_exists:
-            self.change_photo(f'question_img', f'Q{self.cur_question_idx + 1}.png', screen_name)
+            self.change_photo(f'question_img', f'{path_to_images}Q{self.cur_question_idx + 1}.png', screen_name)
         else:
-            self.change_photo(f'question_img', f'Q1.png', screen_name)
+            self.change_photo(f'question_img', f'{path_to_images}Q1.png', screen_name)
 
         # set the button
         self.on('reset')
@@ -322,9 +326,9 @@ class DawnApp(MDApp):
 
         screen = screen_manager.get_screen(screen_name)
         for id in images_ids:
-            screen.ids[f'{id}_btn'].source = f'{id}.png'
+            screen.ids[f'{id}_btn'].source = f'{path_to_images}{id}.png'
 
-        screen.ids[f'{screen_name}_btn'].source = f'{screen_name}_p.png'
+        screen.ids[f'{screen_name}_btn'].source = f'{path_to_images}{screen_name}_p.png'
 
     def go_to(self, screen_name):
         # saves the last screen before changing
@@ -362,11 +366,11 @@ class DawnApp(MDApp):
                 screen = screen_manager.get_screen(screen_name)
                 screen_manager.current = screen_name
                 self.create_scrollview()
-                screen.ids['profile_btn'].source = 'profile_p.png'
+                screen.ids['profile_btn'].source = f'{path_to_images}profile_p.png'
             elif screen_name == 'profile_security':
                 screen = screen_manager.get_screen(screen_name)
                 screen_manager.current = screen_name
-                screen.ids['profile_btn'].source = 'profile_p.png'
+                screen.ids['profile_btn'].source = f'{path_to_images}profile_p.png'
             elif screen_name == 'next_question' or screen_name == 'prev_question' or screen_name == 'question':
                 if self.last_screen == 'login':
                     self.root.transition = SlideTransition(direction='up')
@@ -548,23 +552,23 @@ class DawnApp(MDApp):
 
         Window.clearcolor = get_color_from_hex("#F5E5D6")
         self.first_scroll_view = True
-        self.icon = 'app_logo.png'
+        self.icon = f'{path_to_images}app_logo.png'
         self.first_question(first=True)
         self.last_screen = 'login'
 
         screen_manager = ScreenManager()
-        screen_manager.add_widget(Builder.load_file('login.kv'))
-        screen_manager.add_widget(Builder.load_file('profile.kv'))
-        screen_manager.add_widget(Builder.load_file('signup.kv'))
-        screen_manager.add_widget(Builder.load_file('daily.kv'))
-        screen_manager.add_widget(Builder.load_file('home.kv'))
-        screen_manager.add_widget(Builder.load_file('profile_diagnoseMe.kv'))
-        screen_manager.add_widget(Builder.load_file('profile_security.kv'))
-        screen_manager.add_widget(Builder.load_file('diagnose.kv'))
-        screen_manager.add_widget(Builder.load_file('presplash_diagnose.kv'))
-        screen_manager.add_widget(Builder.load_file('question.kv'))
-        screen_manager.add_widget(Builder.load_file('question_details.kv'))
-        screen_manager.add_widget(Builder.load_file('question_details_datepick.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'login.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'profile.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'signup.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'daily.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'home.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'profile_diagnoseMe.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'profile_security.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'diagnose.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'presplash_diagnose.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'question.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'question_details.kv'))
+        screen_manager.add_widget(Builder.load_file(path_to_kv + 'question_details_datepick.kv'))
 
         return screen_manager
 
