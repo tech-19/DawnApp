@@ -30,33 +30,3 @@ class DataBase():
         }
 
         return self.patient_db().insert_one(document)
-
-
-
-"""
-
-
-
-
-def add_patient(self, firstname, email, username, password, date_of_birth, height, weight, diagnose):
-    questions = []
-    for i in questions:
-        questions.append(i)
-    document = {
-        'First name': firstname,
-        'Email': email,
-        'Username': username,
-        'Password': password,
-        'Date of birth': date_of_birth,
-        #        'Date': datetime.datetime.now(),
-        'Height': height,
-        'Weight': weight,
-        'Diagnose': diagnose,
-        'Questions': questions
-
-    }
-
-    return self.patient_db().insert_one(document)
-
-add_patient(self,'lilo', '2@gmail.com', 'lili', '22222', '33333', '132', '43', 'ADS')\
-    """

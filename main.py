@@ -11,14 +11,37 @@ from kivy.uix.scrollview import ScrollView
 from kivy.utils import get_color_from_hex
 from kivymd.app import MDApp
 from kivymd.uix.list import MDList, TwoLineListItem
+from kivy.uix.popup import Popup
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.widget import Widget
 
 from db_connection import DataBase
 from user import User
 
-
 path_to_images = 'assets/images/'
 path_to_kv = 'libs/uix/kv/'
 path_to_classes = 'libs/uix/baseclass'
+
+
+# class to call the popup function
+class PopupWindow(Widget):
+
+    def btn(self):
+        popFun()
+
+
+# class to build GUI for a popup window
+class P(FloatLayout):
+    pass
+
+
+# function that displays the content
+def popFun():
+    show = P()
+    window = Popup(title="Details", content=show,
+                   size_hint=(None, None), size=(300, 300))
+    window.open()
+
 
 def delay(seconds):
     start = time.time()
@@ -51,29 +74,6 @@ class DawnApp(MDApp):
 
     def login(self, *args):
         screen_manager.current = "login"
-
-    """
-    def details_check(self, next_screen):
-        # This function checking the details coming from the login and signup pages
-        # at the end of the check, send the app to the next_screen
-        screen = self.getScreen(screen_manager.current)
-        if screen_manager.current == 'login':
-            user.username = screen.ids['username_login'].text
-            print("username received", user.username)
-            user.password = screen.ids['password_login'].text
-        if screen_manager.current == 'signup':
-            user.username = screen.ids['username_signup'].text
-            print("user from signup recevied", user.username)
-            user.password = screen.ids['password_signup'].text
-            user.email = screen.ids['email_signup'].text
-
-        # the next function is temporarly and need to be deleted
-        #user.TEMP_create_firstlast_name(user.username)
-
-        user.print_user_info()
-        self.go_to(next_screen)
-        pass
-    """
 
     def render_login_signup_page(self, screen_name):
         screen = self.getScreen(screen_name)
@@ -219,7 +219,6 @@ class DawnApp(MDApp):
 
         elif operation == 'prev_question' and self.cur_question_idx > 0:
             self.cur_question_idx -= 1
-
 
         # if the user finished all of the questions
         if self.cur_question_idx >= self.number_of_questions:
@@ -467,6 +466,8 @@ class DawnApp(MDApp):
             DawnApp.go_to(self, 'home')
 
         else:
+            popFun()
+            """
             root = Tk()
             root.wm_title("DAWN")
             frm = ttk.Frame(root, padding=100)
@@ -475,6 +476,7 @@ class DawnApp(MDApp):
             ttk.Button(frm, text="Exit", command=root.destroy).grid(column=1, row=0)
             root.mainloop()
             DawnApp.go_to(self, 'login')
+            """
 
     # sign up a user to db
     def sign_up(self):

@@ -1,5 +1,3 @@
-from datetime import date, datetime
-
 
 class Question:
     def __init__(self, number, question, answer):
@@ -9,7 +7,6 @@ class Question:
 
 
 class User:
-
     def __init__(self, height, weight, dob, first, last, username, password, email=''):
         self.height = height
         self.weight = weight
